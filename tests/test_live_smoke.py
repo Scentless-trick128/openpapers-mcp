@@ -53,9 +53,7 @@ def live_client() -> httpx.AsyncClient:
 
 async def test_openalex_search_returns_relevant_hit(live_client: httpx.AsyncClient) -> None:
     """OpenAlex ?search= must return at least one work with a title."""
-    results = await openalex_search_works(
-        live_client, "attention is all you need", per_page=3
-    )
+    results = await openalex_search_works(live_client, "attention is all you need", per_page=3)
     assert results, "OpenAlex returned zero results for a known query"
     top = results[0]
     assert top.title, "top result has no title"
