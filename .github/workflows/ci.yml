@@ -5,6 +5,8 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
+    # Enables the manual `live-smoke` job via the Actions UI ("Run workflow").
 
 permissions:
   contents: read
