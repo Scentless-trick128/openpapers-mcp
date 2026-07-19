@@ -32,7 +32,8 @@ jobs:
         run: uv python install ${{ matrix.python-version }}
 
       - name: Install dependencies
-        run: uv sync --extra-group dev
+        # `--group dev` installs the [dependency-groups].dev tooling.
+        run: uv sync --group dev
 
       - name: Lint (ruff)
         run: uv run ruff check .
