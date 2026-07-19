@@ -1,0 +1,118 @@
+[project]
+name = "openpapers"
+version = "0.1.0"
+description = "Local MCP server for scientific paper research (OpenAlex + CrossRef + Unpaywall)"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+    { name = "Philipp Polte", email = "philipp.polte@gmail.com" }
+]
+requires-python = ">=3.12,<3.14"
+keywords = [
+    "mcp",
+    "model-context-protocol",
+    "openalex",
+    "crossref",
+    "unpaywall",
+    "scientific-papers",
+    "open-access",
+    "academic-research",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Internet :: WWW/HTTP",
+    "Typing :: Typed",
+]
+dependencies = [
+    "anyio>=4.4,<5",
+    "httpx>=0.28,<1",
+    "mcp[cli]>=1.28,<2",
+    "pydantic>=2.13,<3",
+    "python-dotenv>=1.2,<2",
+]
+
+[project.urls]
+Homepage = "https://github.com/Kaago/openpapers-mcp"
+Repository = "https://github.com/Kaago/openpapers-mcp"
+Issues = "https://github.com/Kaago/openpapers-mcp/issues"
+Changelog = "https://github.com/Kaago/openpapers-mcp/blob/main/CHANGELOG.md"
+Security = "https://github.com/Kaago/openpapers-mcp/security/policy"
+
+[project.scripts]
+openpapers = "openpapers.__main__:main"
+
+[build-system]
+requires = ["uv_build>=0.11.29,<0.12.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "mypy>=1.10",
+    "pre-commit>=3.7",
+    "pytest>=8.0",
+    "pytest-asyncio>=1.0",
+    "respx>=0.21",
+    "ruff>=0.6",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+markers = [
+    "live: tests that hit the real APIs (skipped unless OPENPAPERS_LIVE=1)",
+]
+
+# --------------------------------------------------------------------------- #
+# Tooling
+# --------------------------------------------------------------------------- #
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+# Sensible default set: correctness + style + a few opinionated ones.
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # isort
+    "B",    # flake8-bugbear
+    "C4",   # flake8-comprehensions
+    "UP",   # pyupgrade
+    "SIM",  # flake8-simplify
+    "RUF",  # ruff-specific
+]
+ignore = [
+    "E501",   # line too long — ruff format handles wrapping where it matters
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["B017"]  # allow pytest.raises(Exception) in tests
+
+[tool.ruff.format]
+docstring-code-format = true
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+warn_unreachable = true
+files = ["src/openpapers"]
+
+[[tool.mypy.overrides]]
+# Third-party libs without stubs.
+module = ["respx.*"]
+ignore_missing_imports = true
+
+[tool.uv]
+package = true

@@ -1,0 +1,75 @@
+name: Bug report
+description: Report something that's broken
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file a bug! For security issues, please
+        use [private vulnerability reporting](../../security/advisories/new)
+        instead of this form.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: A clear description of the unexpected behavior. Include the exact tool name and arguments if you can.
+      placeholder: "I called `search_papers(...)` and expected X, but got Y."
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: The smallest set of steps that triggers the issue.
+      placeholder: |
+        1. `uv run openpapers`
+        2. From the client, call `...`
+        3. Observe ...
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: OpenPapers version
+      placeholder: "0.1.0"
+    validations:
+      required: true
+
+  - type: input
+    id: client
+    attributes:
+      label: MCP client used
+      placeholder: "Claude Desktop / ZCode / Cursor / other"
+    validations:
+      required: true
+
+  - type: input
+    id: python
+    attributes:
+      label: Python version
+      placeholder: "3.12.x"
+    validations:
+      required: false
+
+  - type: dropdown
+    id: polite
+    attributes:
+      label: Is CONTACT_EMAIL set?
+      options:
+        - "Yes"
+        - "No"
+        - "Not sure"
+    validations:
+      required: false
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant stderr log lines
+      description: Paste anything useful from the server log (it goes to stderr). Redact personal information first.
+      render: shell
+    validations:
+      required: false
