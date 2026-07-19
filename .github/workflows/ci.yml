@@ -49,18 +49,24 @@ jobs:
         run: uv run pytest -v
 
   # Optional manual smoke test against the live APIs.
-  # Runs only when the workflow is manually dispatched with the input.
+  # Triggered via `Actions → CI → Run workflow` on GitHub. Pings OpenAlex,
+  # CrossRef, and Unpaywall once each, asserting the field contract still
+  # holds. No secrets required — CONTACT_EMAIL is a non-sensitive variable.
   live-smoke:
     name: Live API smoke test (manual)
     runs-on: ubuntu-latest
     if: github.event_name == 'workflow_dispatch'
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v3
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v7
         with:
           enable-cache: true
-      - run: uv sync
-      - run: uv run pytest -m live -v
+      - name: Install dependencies
+        run: uv sync --group dev
+      - name: Run live smoke tests
+        run: uv run pytest -m live -v
         env:
-          CONTACT_EMAIL: openpapers-ci@example.com
+          # Non-secret: appears in upstream User-Agent / mailto headers and is
+          # required by Unpaywall (rejects example.com domains with HTTP 422).
+          CONTACT_EMAIL: ${{ vars.CONTACT_EMAIL }}
           OPENPAPERS_LIVE: "1"

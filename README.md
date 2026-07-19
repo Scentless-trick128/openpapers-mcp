@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 [![Python 3.12+](https://img.shields.io/badge/python-3.12%2B-blue.svg)](https://www.python.org/downloads/)
 [![CI](https://github.com/Kaago/openpapers-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/Kaago/openpapers-mcp/actions/workflows/ci.yml)
-[![Tests](https://img.shields.io/badge/tests-69%20offline-green.svg)](#development)
+[![Tests](https://img.shields.io/badge/tests-passing-brightgreen.svg)](#development)
 
 A local [Model Context Protocol](https://modelcontextprotocol.io) server for
 scientific paper research — search, metadata, abstracts, and **legal** Open
@@ -36,7 +36,7 @@ git clone https://github.com/Kaago/openpapers-mcp.git
 cd OpenPapers
 cp .env.example .env        # then edit CONTACT_EMAIL
 uv sync                     # install deps
-uv run pytest               # 69 tests, all offline
+uv run pytest               # 69 offline tests (+ 3 live tests gated on OPENPAPERS_LIVE=1)
 uv run openpapers           # start the stdio MCP server
 ```
 
@@ -195,7 +195,7 @@ src/openpapers/
     ├── unpaywall.py   # OA lookup
     ├── downloader.py  # PDF download with atomic writes & magic-byte check
     └── util.py        # DOI normalization, abstract rebuild, name parsing
-tests/                 # 69 tests, all offline via respx
+tests/                 # 69 offline tests via respx + 3 live smoke tests
 ```
 
 ### Design notes

@@ -18,7 +18,8 @@ _No public changes yet._
 - OpenAlex, CrossRef, and Unpaywall integrations with polite-pool headers,
   retry-with-backoff, and HTTP-date `Retry-After` handling.
 - 69 offline unit tests via `respx` (field mapping, security guards,
-  retry/backoff, abstract reconstruction, OA resolution).
+  retry/backoff, abstract reconstruction, OA resolution), plus 3 live smoke
+  tests gated on `OPENPAPERS_LIVE=1` (one ping per upstream API).
 - Configuration via `.env` (`CONTACT_EMAIL`, `PDF_DIR`, `HTTP_*`, `PDF_MAX_BYTES`).
 - `POLITE_POOL` env var: set to `0` to withhold the contact email from all
   upstream requests (privacy mode, at the cost of stricter rate limits).
